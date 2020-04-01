@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float walkSpeed = 4.0f;
-    public float runSpeed = 8.0f;
+    public float runSpeed = 10.0f;
+    public float maxSpeed = 13.0f;
+    public float timeToMax = 6.5f;
     public float slideSpeed = 10.0f;
     public float crouchSpeed = 2f;
     [SerializeField]
@@ -18,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 moveDirection = Vector3.zero;
     [HideInInspector]
     public Vector3 contactPoint;
-    
+    [HideInInspector]
     public CharacterController controller;
     [HideInInspector]
     public bool playerControl = false;
@@ -31,12 +33,20 @@ public class PlayerMovement : MonoBehaviour
     private bool forceGravity;
     private float forceTime = 0;
 
+    float accelRatePerSec;
+    float forwardVelocity;
+
+    void Awake()
+    {
+        accelRatePerSec = maxSpeed / timeToMax;
+    }
+
     private void Start()
     {
         // Saving component references to improve performance.
         controller = GetComponent<CharacterController>();
     }
-    
+
     private void Update()
     {
         if (forceTime > 0)
@@ -45,9 +55,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(forceTime > 0)
+        if (forceTime > 0)
         {
-            if(forceGravity)
+            if (forceGravity)
                 moveDirection.y -= gravity * Time.deltaTime;
             grounded = (controller.Move(moveDirection * Time.deltaTime) & CollisionFlags.Below) != 0;
         }
@@ -60,19 +70,24 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Vector2 input, bool sprint, bool crouching)
     {
-        if(forceTime > 0)
+        if (forceTime > 0)
             return;
-
         float speed = (!sprint) ? walkSpeed : runSpeed;
         if (crouching) speed = crouchSpeed;
+        if (sprint)
+        {
+            speed += accelRatePerSec * Time.deltaTime;
+        }
+        speed = Mathf.Min(speed, maxSpeed);
 
+        //print(speed);
         if (grounded)
         {
             moveDirection = new Vector3(input.x, -antiBumpFactor, input.y);
             moveDirection = transform.TransformDirection(moveDirection) * speed;
             UpdateJump();
         }
-        
+
         // Apply gravity
         moveDirection.y -= gravity * Time.deltaTime;
         // Move the controller, and set grounded true or false depending on whether we're standing on something
@@ -126,5 +141,14 @@ public class PlayerMovement : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         contactPoint = hit.point;
+        if (!controller.isGrounded && hit.normal.y < 0.1f)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.DrawRay(hit.point, hit.normal, Color.red, 1.25f);
+                moveDirection = hit.normal * runSpeed;
+                moveDirection.y += jumpSpeed;
+            }
+        }
     }
 }
