@@ -338,6 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1efbd9adf4744468c14a90c29b4c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  playerLoc: {fileID: 0}
 --- !u!65 &275065173
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -421,19 +423,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
       propertyPath: walkSpeed
-      value: 5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
       propertyPath: runSpeed
-      value: 9
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
       propertyPath: jumpSpeed
-      value: 11
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
       propertyPath: gravity
-      value: 25
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
       propertyPath: grounded
@@ -462,7 +464,7 @@ PrefabInstance:
     - target: {fileID: 7085721664118310500, guid: c2dc14f109b09a743b03757ef68006c7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 94.4
+      value: 99.62
       objectReference: {fileID: 0}
     - target: {fileID: 7085721664118310500, guid: c2dc14f109b09a743b03757ef68006c7,
         type: 3}
@@ -554,6 +556,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 826b6cce915b0484b8120f4bd1d57d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  HealthAmount: 100
+  currentHealth: 80
+  dead: 0
+  startCheckpoint: {x: 0, y: 0, z: 0}
+  hurtValue: 20
 --- !u!1 &588946632
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a0490ad9838834192c37c59560e5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  improvement: 50
+  playermovement: {fileID: 0}
 --- !u!136 &588946634
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -767,6 +777,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b1a321fed639446a9baec1f82efe97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  button: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &705471181
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +812,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1efbd9adf4744468c14a90c29b4c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  playerLoc: {fileID: 0}
 --- !u!65 &705471183
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -905,6 +920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1efbd9adf4744468c14a90c29b4c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  playerLoc: {fileID: 0}
 --- !u!65 &799016809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1105,6 +1122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1efbd9adf4744468c14a90c29b4c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  playerLoc: {fileID: 0}
 --- !u!65 &995437482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1211,6 +1230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1efbd9adf4744468c14a90c29b4c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  playerLoc: {fileID: 0}
 --- !u!65 &1087366217
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1314,6 +1335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b5f2337d4725549babfc6d3f1d293f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastCheckpointPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1130321812
 Transform:
   m_ObjectHideFlags: 0
@@ -1360,6 +1382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1efbd9adf4744468c14a90c29b4c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  playerLoc: {fileID: 0}
 --- !u!65 &1164545535
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1466,6 +1490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a014ef7a769674e808466c2eee5ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
 --- !u!65 &1371619581
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1665,6 +1690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1efbd9adf4744468c14a90c29b4c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  playerLoc: {fileID: 0}
 --- !u!65 &1581361676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1863,6 +1890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1efbd9adf4744468c14a90c29b4c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  playerLoc: {fileID: 0}
 --- !u!65 &1934232258
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1969,6 +1998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d22d2cad3d95fe349aa08a78b0ff6b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healValue: 20
+  health: {fileID: 0}
 --- !u!135 &2008188381
 SphereCollider:
   m_ObjectHideFlags: 0
