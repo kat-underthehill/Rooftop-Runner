@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/KS2.ScottBranch.unity
+- path: Assets/KS2.2_WorkingLevel.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
