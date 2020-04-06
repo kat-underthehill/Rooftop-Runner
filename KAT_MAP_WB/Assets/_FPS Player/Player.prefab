@@ -182,10 +182,9 @@ GameObject:
   - component: {fileID: 1149800568}
   - component: {fileID: 2454204925280885241}
   - component: {fileID: 7707081060816314902}
-  - component: {fileID: 456921002}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,7 +198,7 @@ Transform:
   m_GameObject: {fileID: 7085721664118310506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.875, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6526632516643132702}
   m_Father: {fileID: 0}
@@ -250,20 +249,16 @@ MonoBehaviour:
   status: 0
   vaultLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   ledgeLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 256
   ladderLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 512
   wallrunLayer:
     serializedVersion: 2
-    m_Bits: 256
-  topWaterLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  crouchHeight: 1
+    m_Bits: 1024
 --- !u!114 &1149800568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,20 +271,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f030344419af3204dbbe544722643965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 15
-  runSpeed: 25
-  maxSpeed: 35
-  timeToMax: 6.5
-  slideSpeed: 35
-  crouchSpeed: 10
-  jumpSpeed: 18
-  gravity: 40
+  walkSpeed: 4
+  runSpeed: 8
+  slideSpeed: 10
+  crouchSpeed: 2
+  jumpSpeed: 8
+  gravity: 20
   antiBumpFactor: 0.75
   moveDirection: {x: 0, y: 0, z: 0}
   contactPoint: {x: 0, y: 0, z: 0}
   controller: {fileID: 0}
   playerControl: 0
-  grounded: 1
+  grounded: 0
   jump: {x: 0, y: 0, z: 0}
 --- !u!114 &2454204925280885241
 MonoBehaviour:
@@ -315,21 +308,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65849298bdb76a498fa94e056fcb0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &456921002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7085721664118310506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 826b6cce915b0484b8120f4bd1d57d13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 7085721664118310506}
-  HealthAmount: 100
-  currentHealth: 100
-  dead: 0
-  startCheckpoint: {x: 80, y: 100.2, z: 248.11}
-  hurtValue: 20

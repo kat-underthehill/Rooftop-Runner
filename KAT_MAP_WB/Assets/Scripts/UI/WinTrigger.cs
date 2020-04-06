@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WinTrigger : MonoBehaviour
 {
     public Text text;
-    //public Button button;
+    public Button button;
     public PlayerController player;
     private CharacterController cc;
 
