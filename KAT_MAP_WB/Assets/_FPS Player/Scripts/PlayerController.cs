@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum Status { idle, moving, crouching, sliding, climbingLadder, wallRunning, grabbedLedge, climbingLedge, vaulting }
 
@@ -44,6 +45,24 @@ public class PlayerController : MonoBehaviour
 
     int wallDir = 1;
 
+    //public StatusEvent onStatusChange;
+
+    //void ChangeStatus(Status s)
+    //{
+    //    if (status == s) return;
+    //    status = s;
+    //    if (onStatusChange != null)
+    //        onStatusChange.Invoke(status);
+    //}
+
+    //public void AddToStatusChange(UnityAction<Status> action)
+    //{
+    //    if (onStatusChange == null)
+    //        onStatusChange = new StatusEvent();
+
+    //    onStatusChange.AddListener(action);
+    //}
+
     private void Start()
     {
         CreateVaultHelper();
@@ -70,12 +89,18 @@ public class PlayerController : MonoBehaviour
 
 
         //Check for movement updates
-        CheckSliding();
-        CheckCrouching();
-        CheckForWallrun();
-        CheckLadderClimbing();
-        UpdateLedgeGrabbing();
-        CheckForVault();
+
+        if ((int)status < 9) //If we are not swimming
+        {
+            //Check for movement updates
+            CheckSliding();
+            CheckCrouching();
+            CheckForWallrun();
+            CheckLadderClimbing();
+            UpdateLedgeGrabbing();
+            CheckForVault();
+            //Add new check to change status right here
+        }
         //Add new check to change status right here
 
         //Misc
@@ -189,7 +214,7 @@ public class PlayerController : MonoBehaviour
     void CheckSliding()
     {
         //Check to slide when running
-        if (playerInput.crouch && canSlide())
+        if(playerInput.crouch && canSlide())
         {
             slideDir = transform.forward;
             movement.controller.height = halfheight;
@@ -232,7 +257,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!movement.grounded || (int)status > 2) return;
 
-        if (playerInput.crouch)
+        if(playerInput.crouch)
         {
             if (status != Status.crouching)
                 Crouch();
@@ -338,7 +363,8 @@ public class PlayerController : MonoBehaviour
         else if (hasWallToSide(-1))
             wall = -1;
 
-        if (wall == 0) return;
+        if (wall == 0)
+            return;
 
         if (Physics.Raycast(transform.position + (transform.right * wall * radius), transform.right * wall, out var hit, halfradius, wallrunLayer))
         {
@@ -351,11 +377,13 @@ public class PlayerController : MonoBehaviour
     bool hasWallToSide(int dir)
     {
         //Check for ladder in front of player
-        Vector3 top = transform.position + (transform.right * 0.25f * dir);
+
+        Vector3 top = transform.position + (transform.right * 2.0f * dir);
         Vector3 bottom = top - (transform.up * radius);
         top += (transform.up * radius);
 
-        return (Physics.CapsuleCastAll(top, bottom, 0.25f, transform.right * dir, 0.05f, wallrunLayer).Length >= 1);
+        print(Physics.CapsuleCastAll(top, bottom, 2.0f, transform.right * dir, 0.5f, wallrunLayer).Length >= 1);
+        return (Physics.CapsuleCastAll(top, bottom, 2.0f, transform.right * dir, 0.5f, wallrunLayer).Length >= 1);
     }
     /*********************************************************************/
 
@@ -442,7 +470,7 @@ public class PlayerController : MonoBehaviour
         Vector3 localPos = vaultHelper.transform.InverseTransformPoint(transform.position);
         Vector3 move = (vaultDir + (Vector3.up * -(localPos.z - radius) * height)).normalized;
 
-        if (localPos.z > halfheight)
+        if(localPos.z > halfheight)
         {
             movement.controller.height = height;
             status = Status.moving;
@@ -457,14 +485,14 @@ public class PlayerController : MonoBehaviour
 
         float checkDis = 0.05f;
         checkDis += (movement.controller.velocity.magnitude / 16f); //Check farther if moving faster
-        if (hasObjectInfront(checkDis, vaultLayer) && playerInput.Jump())
+        if(hasObjectInfront(checkDis, vaultLayer) && playerInput.Jump())
         {
             if (Physics.SphereCast(transform.position + (transform.forward * (radius - 0.25f)), 0.25f, transform.forward, out var sphereHit, checkDis, vaultLayer))
             {
                 if (Physics.SphereCast(sphereHit.point + (Vector3.up * halfheight), radius, Vector3.down, out var hit, halfheight - radius, vaultLayer))
                 {
                     //Check above the point to make sure the player can fit
-                    if (Physics.SphereCast(hit.point + (Vector3.up * radius), radius, Vector3.up, out var trash, height - radius))
+                    if (Physics.SphereCast(hit.point + (Vector3.up * radius), radius, Vector3.up, out var trash, height-radius))
                         return; //If cannot fit the player then do not vault
 
                     vaultOver = hit.point;
