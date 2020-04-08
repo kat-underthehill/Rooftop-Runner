@@ -256,7 +256,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1435906166506489010, guid: 620fc6df263ae224e8b66a782a40f95a, type: 3}
@@ -336,7 +336,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
@@ -919,7 +919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 456920994}
   HealthAmount: 100
-  currentHealth: 80
+  currentHealth: 100
   dead: 0
   startCheckpoint: {x: 42.59, y: 59.55, z: 294.5}
   hurtValue: 20
@@ -1171,7 +1171,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615647862}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -16309,7 +16309,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -342727684152718662, guid: 3acd42402e7f1e34da2b82da29f5fbac, type: 3}
