@@ -7,6 +7,7 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
     public GameObject player;
+    public Healthbar healthBar;
     private GameMaster gm;
     private Transform PlayerTransform;
     public float HealthAmount = 100.0f;
@@ -18,6 +19,7 @@ public class Health : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        healthBar.SetMaxHealth(HealthAmount);
         cc = player.GetComponent<CharacterController>();
         PlayerTransform = GameObject.Find("Player").transform;
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
@@ -31,6 +33,7 @@ public class Health : MonoBehaviour {
         {
             //Destroy(this.gameObject);
             dead = true;
+            healthBar.SetMaxHealth(HealthAmount);
             gm.lastCheckpointPos = startCheckpoint;
             //PlayerTransform.position = currentCheckpoint;
             cc.enabled = false;
@@ -45,6 +48,7 @@ public class Health : MonoBehaviour {
     {
         currentHealth -= hurtValue;
         print(currentHealth);
+        healthBar.SetHealth(currentHealth);
         cc.enabled = false;
         transform.position = gm.lastCheckpointPos;
         cc.enabled = true;
