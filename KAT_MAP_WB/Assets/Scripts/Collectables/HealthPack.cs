@@ -6,18 +6,13 @@ public class HealthPack : MonoBehaviour {
 
     public float healValue = 20.0f;
     public Health health;
-
+    public Healthbar healthBar;
    
 
 	// Use this for initialization
 	void Start () {
         health = GameObject.FindGameObjectWithTag("Player").GetComponent<Health> ();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void OnTriggerEnter(Collider other)
     {
@@ -27,11 +22,13 @@ public class HealthPack : MonoBehaviour {
             if (health.currentHealth > 80)
             {
                 health.currentHealth = 100;
+                healthBar.SetHealth(health.currentHealth);
                 print(health.currentHealth);
             }
             else
             {
                 health.currentHealth += healValue;
+                healthBar.SetHealth(health.currentHealth);
                 print(health.currentHealth);
             }
             Destroy(this.gameObject);
