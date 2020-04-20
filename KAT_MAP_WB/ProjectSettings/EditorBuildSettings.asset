@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/StartScreen.unity
     guid: b81d2605c00aee84e990cb02f565b4b9
-  - enabled: 1
+  - enabled: 0
     path: Assets/KS2.ScottBranch.unity
     guid: 851cd162dd7cf214d907b93c2a2c2de1
+  - enabled: 1
+    path: Assets/KS2.ScottBranch.2.unity
+    guid: 6aff4fa74fb5858468b803e515a0226a
   m_configObjects: {}
